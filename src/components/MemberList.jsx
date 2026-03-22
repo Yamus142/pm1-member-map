@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-export default function MemberList({ members, onDelete, onFocusProvince }) {
+export default function MemberList({ members, onFocusProvince }) {
   const [collapsed, setCollapsed] = useState(false);
 
   return (
@@ -27,13 +27,6 @@ export default function MemberList({ members, onDelete, onFocusProvince }) {
                   <span className="mc-name">{m.name}</span>
                   <span className="mc-province">{m.province}{m.ward ? ` · ${m.ward}` : ''}</span>
                 </div>
-                <button
-                  className="btn-delete"
-                  onClick={(e) => { e.stopPropagation(); onDelete(m.id); }}
-                  title="Xóa"
-                >
-                  ✕
-                </button>
               </li>
             ))}
           </ul>

@@ -3,7 +3,7 @@ import VietnamMap from './components/VietnamMap';
 import MemberList from './components/MemberList';
 import AddMemberModal from './components/AddMemberModal';
 import Top10 from './components/Top10';
-import { subscribeMembers, addMember, deleteMember } from './services/storage';
+import { subscribeMembers, addMember } from './services/storage';
 import './App.css';
 
 export default function App() {
@@ -23,10 +23,6 @@ export default function App() {
   const handleAdd = async (memberData) => {
     await addMember(memberData);
     setShowModal(false);
-  };
-
-  const handleDelete = async (id) => {
-    await deleteMember(id);
   };
 
   const handleFocusProvince = useCallback((provinceName) => {
@@ -67,7 +63,7 @@ export default function App() {
             <Top10 members={members} onFocusProvince={handleFocusProvince} />
           </div>
           <div className="left-list">
-            <MemberList members={members} onDelete={handleDelete} onFocusProvince={handleFocusProvince} />
+            <MemberList members={members} onFocusProvince={handleFocusProvince} />
           </div>
         </aside>
 
