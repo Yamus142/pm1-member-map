@@ -687,6 +687,131 @@ body {
 .form-group select option { background: var(--bg-card); color: var(--text-primary); }
 .form-group select:disabled { opacity: 0.35; cursor: not-allowed; }
 
+/* ====== Searchable Select ====== */
+.searchable-select {
+  position: relative;
+  width: 100%;
+}
+
+.searchable-select-trigger {
+  width: 100%;
+  padding: 10px 12px;
+  background: rgba(2, 6, 23, 0.6);
+  border: 1px solid rgba(56, 189, 248, 0.2);
+  border-radius: 8px;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  font-family: inherit;
+}
+
+.searchable-select-trigger.has-value {
+  color: var(--text-primary);
+}
+
+.searchable-select-trigger:hover:not(.disabled) {
+  border-color: var(--accent);
+}
+
+.searchable-select-trigger.disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.searchable-select-dropdown {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  background: var(--bg-card);
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  border-radius: 8px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  z-index: 100;
+  overflow: hidden;
+  animation: dropdown-in 0.15s ease-out;
+}
+
+@keyframes dropdown-in {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.searchable-select-search {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-bottom: 1px solid rgba(56, 189, 248, 0.15);
+  color: var(--text-muted);
+}
+
+.searchable-select-search input {
+  flex: 1;
+  background: none;
+  border: none;
+  outline: none;
+  color: var(--text-primary);
+  font-size: 0.85rem;
+  font-family: inherit;
+}
+
+.searchable-select-search input::placeholder {
+  color: var(--text-muted);
+  opacity: 0.6;
+}
+
+.searchable-select-options {
+  list-style: none;
+  margin: 0;
+  padding: 4px 0;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.searchable-select-options::-webkit-scrollbar {
+  width: 4px;
+}
+
+.searchable-select-options::-webkit-scrollbar-thumb {
+  background: rgba(56, 189, 248, 0.3);
+  border-radius: 2px;
+}
+
+.searchable-select-option {
+  padding: 8px 12px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: background 0.1s, color 0.1s;
+}
+
+.searchable-select-option:hover {
+  background: rgba(56, 189, 248, 0.1);
+  color: var(--text-primary);
+}
+
+.searchable-select-option.selected {
+  color: var(--accent);
+  background: rgba(56, 189, 248, 0.08);
+}
+
+.searchable-select-empty {
+  padding: 12px;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  font-style: italic;
+}
+
 .form-error {
   color: var(--destructive);
   font-size: 0.78rem;

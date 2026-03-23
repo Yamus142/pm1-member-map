@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { PROVINCES, WARDS_BY_PROVINCE } from '../data/provinceCoords';
+import SearchableSelect from './SearchableSelect';
 
 export default function AddMemberModal({ onAdd, onClose }) {
   const [name, setName] = useState('');
@@ -7,6 +8,7 @@ export default function AddMemberModal({ onAdd, onClose }) {
   const [ward, setWard] = useState('');
   const [error, setError] = useState('');
 
+  const provinceNames = PROVINCES.map((p) => p.name);
   const wards = province ? (WARDS_BY_PROVINCE[province] || []) : [];
 
   // Đóng khi nhấn Escape
@@ -46,29 +48,23 @@ export default function AddMemberModal({ onAdd, onClose }) {
 
           <div className="form-group">
             <label>Tỉnh / Thành phố *</label>
-            <select
+            <SearchableSelect
+              options={provinceNames}
               value={province}
-              onChange={(e) => { setProvince(e.target.value); setWard(''); }}
-            >
-              <option value="">-- Chọn tỉnh/thành phố --</option>
-              {PROVINCES.map((p) => (
-                <option key={p.id} value={p.name}>{p.name}</option>
-              ))}
-            </select>
+              onChange={(val) => { setProvince(val); setWard(''); }}
+              placeholder="-- Chọn tỉnh/thành phố --"
+            />
           </div>
 
           <div className="form-group">
             <label>Phường / Xã</label>
-            <select
+            <SearchableSelect
+              options={wards}
               value={ward}
-              onChange={(e) => setWard(e.target.value)}
+              onChange={setWard}
+              placeholder="-- Chọn phường/xã (tuỳ chọn) --"
               disabled={!province}
-            >
-              <option value="">-- Chọn phường/xã (tuỳ chọn) --</option>
-              {wards.map((w) => (
-                <option key={w} value={w}>{w}</option>
-              ))}
-            </select>
+            />
           </div>
 
           {error && <p className="form-error">{error}</p>}
